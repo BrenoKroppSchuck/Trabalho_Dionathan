@@ -1,4 +1,4 @@
-const amizade = require("../models/amizade")
+const Amizade = require("../models/amizade")
 const AmizadesDAO = require('../models/dao/AmizadesDAO');
 
 class AmizadeController {

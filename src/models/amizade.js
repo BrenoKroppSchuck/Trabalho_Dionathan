@@ -1,8 +1,4 @@
-const Estatistica = require("../models/estatistica");
-const EstatisticasDAO = require('../models/dao/EstatisticasDAO');
-const ConquistasDAO = require('../models/dao/ConquistasDAO');
-
-class Jogador {
+class Amizade {
   constructor({ id, nickName, nome, classificacao, estatisticas, conquistas }) {
     this.id = id ? id : -1;
     this.nickName = nickName;
@@ -30,7 +26,7 @@ class Jogador {
     return this.amigos.map(amigo => amigo.principal());
   }
 
-  // Restante dos métodos da classe...
+  
 }
 
 module.exports = Jogador;

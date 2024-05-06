@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const amizadesControllerController = require('../controllers/AmizadesController');
+const amizadesController = require('../controllers/AmizadesController');
 
 // Rota para criar um novo jogador (CREATE)
 router.post('/', amizadesController.create);
