@@ -6,7 +6,7 @@ class Amizade {
     this.classificacao = classificacao ? classificacao : -1;
     this.estatisticas = estatisticas ? estatisticas : EstatisticasDAO.criar(new Estatistica({}));
     this.conquistas = conquistas ? conquistas : {};
-    this.amigos = []; // Array para armazenar os amigos do jogador
+    this.amigos = amigos || []; // Array para armazenar os amigos do jogador
   }
 
   // Adiciona um amigo à lista de amigos do jogador
@@ -29,5 +29,5 @@ class Amizade {
   
 }
 
-module.exports = Jogador;
+module.exports = Amizade;
 

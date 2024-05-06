@@ -9,23 +9,32 @@ class Estatisticas {
     this.jogosPerdidos = jogosPerdidos ? jogosPerdidos : 0;
   }
 
-  // Função chamada quando o jogador que pertence esta estatistica vende uma partida
+  // Função chamada quando o jogador que pertence esta estatistica vence uma partida
   partidaGanha() {
-
+    this.jogosVencidos++;
+    this.calculaEstatistica();
   }
 
   // Função chamada quando o jogador que pertence esta estatistica perde uma partida
   partidaPerdida() {
-
+    this.jogosPerdidos++;
+    this.calculaEstatistica();
   }
 
   // Calcula a pontuação e os jogos jogados da estatistica
   calculaEstatistica() {
     // Calcular a pontuação aqui
+    this.pontuacao = (this.jogosVencidos * 10) - (this.jogosPerdidos * 5);
+
+    // Garantir que a pontuação não seja menor que 0
+    if (this.pontuacao < 0) {
+      this.pontuacao = 0;
+    }
 
     // Calcula os jogos jogados
     this.jogosJogados = this.jogosPerdidos + this.jogosVencidos;
   }
 }
 
-module.exports = Estatisticas
+module.exports = Estatistica;
+
