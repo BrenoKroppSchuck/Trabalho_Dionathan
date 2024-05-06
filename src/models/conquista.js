@@ -6,4 +6,4 @@ class Conquista {
   }
 }
 
-module.exports = Conquista
+module.exports = Conquista;
