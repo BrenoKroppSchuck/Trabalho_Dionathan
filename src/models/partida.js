@@ -1,10 +1,10 @@
-class Partida {
-    constructor({ id, timeVencedor, timePerdedor, mvp }) {
-        this.id = id ? id : -1;
-        this.timeVencedor = this.timeVencedor;
-        this.timePerdedor = this.timePerdedor;
-        this.mvp = this.mvp;
+class Partidas {
+    constructor({ id, timeVencedor = [], timePerdedor = [], mvp = null }) {
+        this.id = id;
+        this.timeVencedor = timeVencedor;
+        this.timePerdedor = timePerdedor;
+        this.mvp = mvp;
     }
 }
 
-module.exports = Partida
+module.exports = Partidas
