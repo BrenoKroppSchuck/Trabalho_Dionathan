@@ -1,12 +1,9 @@
 class Amizade {
-  constructor({ id, nickName, idAmigo1, idAmigo2, amigos }) {
+  constructor({ id, idAmigo1, idAmigo2 }) {
     this.id = id ? id : -1;
-    this.nickName = nickName;
-
     this.idAmigo1 = idAmigo1;
     this.idAmigo2 = idAmigo2;
-    this.amigos = amigos || []
-
+    this.amigos = [];
   }
 
   // Adiciona um amigo à lista de amigos do jogador
@@ -25,9 +22,6 @@ class Amizade {
   listarAmigos() {
     return this.amigos.map(amigo => amigo.principal());
   }
-
-
 }
 
 module.exports = Amizade;
-
