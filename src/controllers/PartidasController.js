@@ -37,6 +37,7 @@ class PartidasController {
     list(req, res) {
     let listaPartidas = PartidasDAO.listar().slice();
 
+
     if (listaPartidas.length === 0) {
         res.status(200).json({ message: "Nenhuma partida encontrada" });
     } else {
@@ -49,6 +50,19 @@ class PartidasController {
 
         res.status(200).json({ partidas: listaPartidas });
         
+
+        // Faz o response para o browser
+        if (listaPartidas.length === 0)
+            res.status(200).json({ message: "Nenhum partida encontrado" })
+        else {
+            // Percorre o array listaPartidas
+            for (let partida of listaPartidas) {
+                // Recalcula as partidas
+
+            }
+            res.status(200).json({ partidas: listaPartidas })
+        }
+
     }
 }
 
@@ -59,7 +73,7 @@ class PartidasController {
 
         // Faz o response para o browser
         if (partida) {
-            partida.calculaPartida()
+
             res.status(200).json({ partida: partida });
         } else {
             res.status(404).json({ message: 'Partida não encontrado' });
@@ -78,8 +92,7 @@ class PartidasController {
             // Atualiza a partida na persistência
             PartidasDAO.atualizar(id, partida)
 
-            // Atualiza classficação dos jogadores
-            PartidasController.calculaPartida()
+
 
             // Faz o response para o browser
             res.status(200).json({ partida: partida });

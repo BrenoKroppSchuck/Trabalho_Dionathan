@@ -1,10 +1,11 @@
 class Partidas {
-    constructor({ id, timeVencedor = [], timePerdedor = [], mvp = null }) {
+    constructor({ id, timeVencedor = [], timePerdedor = [], mvp = null, nickName }) {
         this.id = id;
-        this.timeVencedor = timeVencedor;
-        this.timePerdedor = timePerdedor;
+        this.nickName = nickName;
+        this.timeVencedor = timeVencedor.map(id => nickName[id]);
+        this.timePerdedor = timePerdedor.map(id => nickName[id]);
         this.mvp = mvp;
     }
 }
 
-module.exports = Partidas
+module.exports = Partidas;
