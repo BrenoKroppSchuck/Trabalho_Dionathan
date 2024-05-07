@@ -8,7 +8,7 @@ router.post('/', mensagemController.create);
 // Rota para listar todos os mensagem (READ)
 router.get('/', mensagemController.list);
 
-// Rota para mostrar uma mensagem (READ)
+// Rota para mostrar uma mensagem específica (READ)
 router.get('/:id', mensagemController.show);
 
 // Rota para atualizar uma mensagem (UPDATE)

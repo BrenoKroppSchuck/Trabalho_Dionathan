@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const amizadesController = require('../controllers/AmizadesController');
 
-// Rota para criar um novo jogador (CREATE)
+// Rota para criar uma nova amizade (CREATE)
 router.post('/', amizadesController.create);
 
-// Rota para listar todos os jogadores (READ)
+// Rota para listar todas as amizades (READ)
 router.get('/', amizadesController.list);
 
-// Rota para mostrar um jogador (READ)
+// Rota para mostrar uma amizade (READ)
 router.get('/:id', amizadesController.show);
 
-// Rota para atualizar um jogador (UPDATE)
+// Rota para atualizar uma amizade (UPDATE)
 router.put('/:id', amizadesController.update);
 
-// Rota para deletar um jogador (DELETE)
+// Rota para deletar uma amizade (DELETE)
 router.delete('/:id', amizadesController.delete);
 
 module.exports = router;

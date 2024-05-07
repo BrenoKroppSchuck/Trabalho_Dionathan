@@ -1,5 +1,21 @@
-const Partida = require("../models/partida")
+const Partida = require("../models/partida");
 const PartidasDAO = require('../models/dao/PartidasDAO');
+
+// Função para buscar o nome de um jogador pelo seu ID
+function buscarNomeJogador(idJogador) {
+    // Simulando uma base de dados de jogadores
+    const jogadores = {
+        1: "Jogador1",
+        2: "Jogador2",
+        3: "Jogador3",
+        4: "Jogador4",
+        5: "Jogador5"
+        // Adicione mais jogadores conforme necessário
+    };
+
+    // Retorna o nome do jogador se o ID existir, caso contrário retorna "Desconhecido"
+    return jogadores[idJogador] || "Desconhecido";
+}
 
 class PartidasController {
     // Cria uma nova partida (CREATE)
@@ -19,8 +35,21 @@ class PartidasController {
 
     // Lista todas as partidas (READ)
     list(req, res) {
-        // Copia o array partidaes
-        let listaPartidas = PartidasDAO.listar().slice()
+    let listaPartidas = PartidasDAO.listar().slice();
+
+
+    if (listaPartidas.length === 0) {
+        res.status(200).json({ message: "Nenhuma partida encontrada" });
+    } else {
+        // Mapeie sobre as partidas e substitua os IDs dos times pelos nomes dos jogadores
+        listaPartidas = listaPartidas.map(partida => ({
+            id: partida.id,
+            timeVencedor: buscarNomeJogador(partida.timeVencedor),
+            timePerdedor: buscarNomeJogador(partida.timePerdedor)
+        }));
+
+        res.status(200).json({ partidas: listaPartidas });
+        
 
         // Faz o response para o browser
         if (listaPartidas.length === 0)
@@ -33,7 +62,9 @@ class PartidasController {
             }
             res.status(200).json({ partidas: listaPartidas })
         }
+
     }
+}
 
     // Mostrar um partida (READ)
     show(req, res) {

@@ -15,7 +15,7 @@ router.use('/estatisticas', estatisticasRoutes);
 
 // Importa e utiliza as rotas de estatisticas
 const mensagemRoutes = require('./mensagemRoutes');
-router.use('/mensagem', mensagemRoutes);
+router.use('/mensagens', mensagemRoutes);
 
 // Importa e utiliza as rotas de partidas
 const partidaRoutes = require('./partidasRoutes');
