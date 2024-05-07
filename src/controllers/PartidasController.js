@@ -29,7 +29,7 @@ class PartidasController {
             // Percorre o array listaPartidas
             for (let partida of listaPartidas) {
                 // Recalcula as partidas
-                partida.calculaPartida()
+
             }
             res.status(200).json({ partidas: listaPartidas })
         }
@@ -42,7 +42,7 @@ class PartidasController {
 
         // Faz o response para o browser
         if (partida) {
-            partida.calculaPartida()
+
             res.status(200).json({ partida: partida });
         } else {
             res.status(404).json({ message: 'Partida não encontrado' });
@@ -61,8 +61,7 @@ class PartidasController {
             // Atualiza a partida na persistência
             PartidasDAO.atualizar(id, partida)
 
-            // Atualiza classficação dos jogadores
-            PartidasController.calculaPartida()
+
 
             // Faz o response para o browser
             res.status(200).json({ partida: partida });

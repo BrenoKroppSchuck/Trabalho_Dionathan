@@ -36,5 +36,5 @@ class Estatisticas {
   }
 }
 
-module.exports = Estatistica;
+module.exports = Estatisticas;
 
