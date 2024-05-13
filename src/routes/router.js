@@ -18,10 +18,7 @@ const amizadeRoutes = require('./amizadesRoutes');
 router.use('/amizade', amizadeRoutes);
 
 const mensagemRoutes = require('./mensagemRoutes');
-router.use('/mensagem', mensagemRoutes);
-
-const partidaRoutes = require('./partidasRoutes');
-router.use('/partidas', partidaRoutes);
+router.use('/mensagens', mensagemRoutes);
 
 
 

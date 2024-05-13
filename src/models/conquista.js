@@ -7,3 +7,6 @@ class Conquista {
 }
 
 module.exports = Conquista
+
+
+

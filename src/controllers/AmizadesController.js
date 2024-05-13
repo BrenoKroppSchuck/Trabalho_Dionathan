@@ -1,17 +1,19 @@
-// Importando módulos necessários
-const Amizade = require("../models/amizade");
+const Amizade = require("../models/amizade")
 const AmizadeDAO = require('../models/dao/AmizadesDAO');
+
+const Amizade = require("../models/amizade");
 const JogadoresDAO = require('../models/dao/JogadoresDAO');
+const AmizadeDAO = require('../models/dao/AmizadesDAO');
 
 class AmizadeController {
   // Cria uma nova amizade (CREATE)
   create(req, res) {
     const { amigos } = req.body;
 
-    // Obtendo IDs dos jogadores
+    // Obtendo os IDs dos jogadores
     const jogadoresIds = amigos.map(id => parseInt(id));
 
-    // Buscando jogadores com base em seus IDs
+    // Obtendo os jogadores a partir de seus IDs
     const jogadores = jogadoresIds.map(id => JogadoresDAO.buscarPorId(id));
 
     if (jogadores.every(jogador => jogador)) {
@@ -24,7 +26,7 @@ class AmizadeController {
 }
 
   // Lista todas as amizades (READ)
-  show(req, res) {
+  list(req, res) {
     const listaAmizades = AmizadeDAO.listar();
     res.status(200).json({ amizades: listaAmizades });
   }
@@ -45,17 +47,17 @@ class AmizadeController {
     const idAmizade = parseInt(req.params.id);
     const { amigos } = req.body;
 
-    // Obtendo IDs e apelidos dos jogadores a partir de seus IDs
+    // Obtendo os IDs e nicknames dos jogadores a partir de seus IDs
     const amigosData = amigos.map(id => {
       const jogador = JogadoresDAO.buscarPorId(id);
       if (jogador) {
-        return { id: jogador.id, apelido: jogador.apelido };
+        return { id: jogador.id, nickname: jogador.nickName };
       } else {
         return null; // Se o jogador não for encontrado, retorna null
       }
     });
 
-    // Verificando se todos os jogadores foram encontrados
+    // Verifica se todos os jogadores foram encontrados
     if (amigosData.includes(null)) {
       res.status(404).json({ message: "Jogador não encontrado" });
       return;
@@ -78,5 +80,6 @@ class AmizadeController {
 
 }
 
-// Exportando uma instância da classe AmizadeController
-module.exports = new AmizadeController();
+
+
+module.exports = new AmizadesController();

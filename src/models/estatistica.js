@@ -8,7 +8,7 @@ class Estatisticas {
   }
 
   calculaEstatisticas() {
-    // Calcula a quantidade total de jogos jogados
+    //Calcula a quantidade de jogos jogados
     this.jogosJogados = this.jogosPerdidos + this.jogosVencidos
   }
 
@@ -16,7 +16,7 @@ class Estatisticas {
     // Calcula a quantidade de jogos jogados
     this.jogosJogados = this.jogosPerdidos + this.jogosVencidos;
 
-    // Calcula a pontuação com base nos jogos vencidos e perdidos
+    // Calcula a pontuação com base nos jogos ganhos e perdidos
     this.pontuacao = (this.jogosVencidos * 10) - (this.jogosPerdidos * 5);
 
     // Garante que a pontuação não seja negativa
@@ -30,3 +30,8 @@ class Estatisticas {
 
 
 module.exports = Estatisticas
+
+
+
+
+

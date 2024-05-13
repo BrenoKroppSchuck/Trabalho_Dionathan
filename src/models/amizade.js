@@ -5,4 +5,3 @@ class Amizade {
 }
 
 module.exports = Amizade;
-
