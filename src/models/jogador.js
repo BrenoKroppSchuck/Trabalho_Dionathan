@@ -1,6 +1,6 @@
 const Estatistica = require("../models/estatistica")
 const EstatisticasDAO = require('../models/dao/EstatisticasDAO');
-const ConquistasDAO = require('../models/dao/ConquistasDAO');
+const ConquistasDAO = require("./dao/ConquistasDAO");
 
 class Jogador {
   // Construtur da classe Jogador. Recebe um objeto com todas as propriedades do objeto
@@ -10,35 +10,34 @@ class Jogador {
     this.nome = nome;
     this.classificacao = classificacao ? classificacao : -1;
     this.estatisticas = estatisticas ? estatisticas : EstatisticasDAO.criar(new Estatistica({}))
-    this.conquistas = conquistas ? conquistas : {}
+    this.conquistas = conquistas ? conquistas : []
   }
 
-  // Prepara o objeto jogador para ser apresentado no browser
   verbose() {
-    // Faz uma cópia profunda de jogador
-    let jogador = JSON.parse(JSON.stringify(this));
+    // Cria uma cópia do jogador
+    let jogador = JSON.parse(JSON.stringify(this))
 
     // Atribui as estatisticas ao jogador
-    jogador.estatisticas = EstatisticasDAO.buscarPorId(jogador.estatisticas)
+    jogador.estatisticas = EstatisticasDAO.buscarPorId(this.estatisticas)
 
-    // Atribui as conquistas ao jogador
-    if (jogador.conquistas.length) {
-      for (let i = 0; i < jogador.conquistas.length; i++) {
-        jogador.conquistas[i] = ConquistasDAO.buscarPorId(jogador.conquistas[i])
+    if (this.conquistas.length != 0) {
+      for (let i = 0; i < this.conquistas.length; i++) {
+        jogador.conquistas[i] = ConquistasDAO.buscarPorId(this.conquistas[i])
       }
     }
 
+    // Retorna o Jogador com as estatisticas
     return jogador
   }
 
-  // Lista somente os atributos principais
-  principal() {
-    let jogador = {
+  infoImportante() {
+    let jogadorImportante = {
       id: this.id,
       nickName: this.nickName,
-    }
+      nome: this.nome
 
-    return jogador
+    }
+    return jogadorImportante
   }
 }
 

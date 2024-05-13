@@ -1,6 +1,5 @@
-const Partidas = require("../partida")
+const Partida = require("../partida")
 
-// Vetor de Partidas
 let partidas = [
     // Altere aqui para as suas partidas
     new Partidas({ id: 1, timeVencedor: [1, 2, 3], timePerdedor: [4, 5, 6], mvp: 4 }),
@@ -23,45 +22,40 @@ let partidas = [
     new Partidas({ id: 18, timeVencedor: [6, 2, 4], timePerdedor: [1, 3, 5], mvp: 2 }),
     new Partidas({ id: 19, timeVencedor: [1, 3, 5], timePerdedor: [2, 4, 6], mvp: 5 }),
     new Partidas({ id: 20, timeVencedor: [2, 4, 6], timePerdedor: [1, 3, 5], mvp: 6 })
-];
+]; // Armazena as partidas
 
-class PartidasDAO {
-    // Retorna a lista de partidas
-    listar() {
-        return partidas;
-    }
-
-    // Retorna um partida filtrado peloa sua ID
-    buscarPorId(id) {
-        return partidas.find(partida => partida.id === id);
-    }
-
-    // Verifica existe uma instância de partida com aquele id
-    exist(id) {
-        return this.buscarPorId(id) ? true : false;
-    }
-
-    // Cria e armazena um novo partida
+class PartidaDAO {
+    // Método para criar uma nova partida
     criar(partida) {
-        partida.id = partidas[partidas.length - 1].id + 1;
+        // Atribui um ID à partida antes de adicioná-la à lista de partidas
+        partida.idPartida = partidas.length + 1;
         partidas.push(partida);
-        return parseInt(partida.id);
+        return partida.idPartida; // Retorna o ID da partida criada
     }
 
-    // Atualiza um partida
-    atualizar(id, partidaAtualizado) {
-        const index = partidas.findIndex(partida => partida.id === id);
+    // Método para listar todas as partidas
+    listar() {
+        return partidas; // Retorna a lista completa de partidas
+    }
+
+    // Método para buscar uma partida pelo ID
+    buscarPorId(idPartida) {
+        return partidas.find(partida => partida.idPartida === idPartida); // Retorna a partida correspondente ao ID fornecido
+    }
+
+    // Método para atualizar uma partida
+    atualizar(idPartida, partidaAtualizada) {
+        // Encontra a partida correspondente ao ID fornecido e atualiza seus dados com os da partida atualizada
+        const index = partidas.findIndex(partida => partida.idPartida === idPartida);
         if (index !== -1) {
-            partidas[index] = partidaAtualizado;
+            partidas[index] = partidaAtualizada;
         }
     }
 
-    // Deleta um partida
-    deletar(id) {
-        const index = partidas.findIndex(partida => partida.id === id);
-        if (index !== -1) {
-            partidas.splice(index, 1);
-        }
+    // Método para deletar uma partida
+    deletar(idPartida) {
+        // Remove a partida correspondente ao ID fornecido da lista de partidas
+        partidas = partidas.filter(partida => partida.idPartida !== idPartida);
     }
 }
 
