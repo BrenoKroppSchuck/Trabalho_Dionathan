@@ -1,65 +1,65 @@
 const Partida = require('../models/partida')
-const JogadoresBanco = require('../models/dao/JogadoresDAO');
-const PartidaBanco = require('../models/dao/PartidasDAO');
+const JogadoresDAO = require('../models/dao/JogadoresDAO');
+const PartidaDAO = require('../models/dao/PartidasDAO');
 
-class ControladorPartidas {
-    // Cria uma nova partida
+class PartidaController {
+  // Cria uma nova partida
+   create(req, res) {
+    const { timeVencedor, timePerdedor, mvp } = req.body;
 
-    criar(req, res) {
-        const { timeVencedor, timePerdedor, mvp } = req.body;
-
-        // Verifica se todos os IDs dos jogadores existem no banco de dados
-        const jogadoresValidos = timeVencedor.concat(timePerdedor, [mvp]).every(id => JogadoresBanco.buscarPorId(id));
-        if (!jogadoresValidos) {
-            return res.status(404).json({ mensagem: "ID de jogador inválido" });
-        }
-
-        // Verifica se o MVP está presente em algum dos times
-        const mvpPresenteNaPartida = timeVencedor.includes(mvp) || timePerdedor.includes(mvp);
-        if (!mvpPresenteNaPartida) {
-            return res.status(400).json({ mensagem: "O MVP deve estar na partida" });
-        }
-
-        // Cria a nova partida
-        const novaPartida = new Partida({ timeVencedor, timePerdedor, mvp });
-        const idPartida = PartidaBanco.criar(novaPartida);
-        res.status(201).json({ mensagem: "Partida criada com sucesso", idPartida });
+    // Verifica se todos os IDs dos jogadores existem
+    const jogadoresExistem = timeVencedor.concat(timePerdedor, [mvp]).every(id => JogadoresDAO.buscarPorId(id));
+    if (!jogadoresExistem) {
+      return res.status(404).json({ message: "ID de jogador inválido" });
     }
 
-
-    // Lista todas as partidas
-    listar(req, res) {
-        const listaDePartidas = PartidaBanco.listar();
-        res.status(200).json({ partidas: listaDePartidas });
+    // Verifica se o MVP está em algum dos times
+    const mvpEstaNaPartida = timeVencedor.includes(mvp) || timePerdedor.includes(mvp);
+    if (!mvpEstaNaPartida) {
+      return res.status(400).json({ message: "O MVP deve estar na partida" });
     }
 
-    // Mostra detalhes de uma partida específica
-    mostrar(req, res) {
-        const idPartida = parseInt(req.params.id);
-        const partidaEncontrada = PartidaBanco.buscarPorId(idPartida);
-        if (partidaEncontrada) {
-            res.status(200).json({ partida: partidaEncontrada });
-        } else {
-            res.status(404).json({ mensagem: 'Partida não encontrada' });
-        }
+    // Cria nova partida
+    const novaPartida = new Partida({ timeVencedor, timePerdedor, mvp });
+    const idPartida = PartidaDAO.criar(novaPartida);
+    res.status(201).json({ message: "Partida criada com sucesso", idPartida });
+  }
+
+
+  // Lista todas as partidas
+  list(req, res) {
+    const listaPartidas = PartidaDAO.listar();
+    res.status(200).json({ partidas: listaPartidas });
+  }
+
+  // Mostra uma partida específica
+  show(req, res) {
+    const idPartida = parseInt(req.params.id);
+    const partida = PartidaDAO.buscarPorId(idPartida);
+    if (partida) {
+      res.status(200).json({ partida: partida });
+    } else {
+      res.status(404).json({ message: 'Partida não encontrada' });
+    }
+  }
+    // Deleta uma partida
+    delete(req, res) {
+      const idPartida = parseInt(req.params.id);
+      PartidaDAO.deletar(idPartida);
+      res.status(200).json({ message: "Partida deletada com sucesso" });
     }
 
-    // Atualiza informações de uma partida
-    atualizar(req, res) {
-        const idPartida = parseInt(req.params.id);
-        const { timeVencedor, timePerdedor, mvp } = req.body;
-        const partidaAtualizada = new Partida({ idPartida, timeVencedor, timePerdedor, mvp });
-        PartidaBanco.atualizar(idPartida, partidaAtualizada);
-        res.status(200).json({ mensagem: "Partida atualizada com sucesso", partida: partidaAtualizada });
-    }
+  // Atualiza uma partida
+  update(req, res) {
+    const idPartida = parseInt(req.params.id);
+    const { timeVencedor, timePerdedor, mvp } = req.body;
+    const partidaAtualizada = new Partida({ idPartida, timeVencedor, timePerdedor, mvp });
+    PartidaDAO.atualizar(idPartida, partidaAtualizada);
+    res.status(200).json({ message: "Partida atualizada com sucesso", partida: partidaAtualizada });
+  }
 
-    // Deleta uma partida do banco de dados
-    deletar(req, res) {
-        const idPartida = parseInt(req.params.id);
-        PartidaBanco.deletar(idPartida);
-        res.status(200).json({ mensagem: "Partida deletada com sucesso" });
-    }
+
 }
 
-module.exports = new ControladorPartidas();
+module.exports = new PartidaController();
 

@@ -15,10 +15,15 @@ router.use('/estatisticas', estatisticasRoutes);
 
 // Importa e utiliza as rotas de amizade
 const amizadeRoutes = require('./amizadesRoutes');
-router.use('/amizade', amizadeRoutes);
+router.use('/amizades', amizadeRoutes);
 
+// Importa e utiliza as rotas de mensagens
 const mensagemRoutes = require('./mensagemRoutes');
 router.use('/mensagens', mensagemRoutes);
+
+// Importa e utiliza as rotas de partidas
+const partidaRoutes = require('./partidasRoutes');
+router.use('/partidas', partidaRoutes);
 
 
 
