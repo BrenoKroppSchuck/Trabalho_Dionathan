@@ -2,28 +2,6 @@ const Amizade = require("../amizade");
 
 // Vetor de Amizades
 let amizades = [
-<<<<<<< HEAD
-  new Amizade({ id: 1, amigos: [1, 3] }),
-  new Amizade({ id: 2, amigos: [2, 4] }),
-  new Amizade({ id: 3, amigos: [3, 5] }),
-  new Amizade({ id: 4, amigos: [4, 6] }),
-  new Amizade({ id: 5, amigos: [5, 7] }),
-  new Amizade({ id: 6, amigos: [6, 8] }),
-  new Amizade({ id: 7, amigos: [7, 9] }),
-  new Amizade({ id: 8, amigos: [8, 10] }),
-  new Amizade({ id: 9, amigos: [9, 11] }),
-  new Amizade({ id: 10, amigos: [10, 12] }),
-  new Amizade({ id: 11, amigos: [11, 13] }),
-  new Amizade({ id: 12, amigos: [12, 14] }),
-  new Amizade({ id: 13, amigos: [13, 15] }),
-  new Amizade({ id: 14, amigos: [14, 16] }),
-  new Amizade({ id: 15, amigos: [15, 17] }),
-  new Amizade({ id: 16, amigos: [16, 18] }),
-  new Amizade({ id: 17, amigos: [17, 19] }),
-  new Amizade({ id: 18, amigos: [18, 20] }),
-  new Amizade({ id: 19, amigos: [19, 1] }),
-  new Amizade({ id: 20, amigos: [20, 2] })
-=======
   new Amizade({ id: 1, idAmigo1: 1, idAmigo2: 1 }),
   new Amizade({ id: 2, idAmigo1: 2, idAmigo2: 2 }),
   new Amizade({ id: 3, idAmigo1: 3, idAmigo2: 3 }),
@@ -44,7 +22,7 @@ let amizades = [
   new Amizade({ id: 18, idAmigo1: 18, idAmigo2: 18 }),
   new Amizade({ id: 19, idAmigo1: 19, idAmigo2: 19 }),
   new Amizade({ id: 20, idAmigo1: 20, idAmigo2: 20 })
->>>>>>> f5cb610662f78f9c014529e80f6431b678124e0a
+
 ];
 
 class AmizadeDAO {
