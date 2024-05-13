@@ -1,31 +1,32 @@
-const JogadoresController = require("../controllers/JogadoresController");
-
 class Estatisticas {
   constructor({ id, pontuacao, jogosJogados, jogosVencidos, jogosPerdidos }) {
-    this.id = id ? id : -1;
+    this.id = id ? id : 0;
     this.pontuacao = pontuacao ? pontuacao : 0;
     this.jogosJogados = jogosJogados ? jogosJogados : 0;
     this.jogosVencidos = jogosVencidos ? jogosVencidos : 0;
     this.jogosPerdidos = jogosPerdidos ? jogosPerdidos : 0;
   }
 
-  // Função chamada quando o jogador que pertence esta estatistica vende uma partida
-  partidaGanha() {
-
+  calculaEstatisticas() {
+    // Calcula a quantidade total de jogos jogados
+    this.jogosJogados = this.jogosPerdidos + this.jogosVencidos
   }
 
-  // Função chamada quando o jogador que pertence esta estatistica perde uma partida
-  partidaPerdida() {
-
-  }
-
-  // Calcula a pontuação e os jogos jogados da estatistica
-  calculaEstatistica() {
-    // Calcular a pontuação aqui
-
-    // Calcula os jogos jogados
+  calculaEstatisticas() {
+    // Calcula a quantidade de jogos jogados
     this.jogosJogados = this.jogosPerdidos + this.jogosVencidos;
+
+    // Calcula a pontuação com base nos jogos vencidos e perdidos
+    this.pontuacao = (this.jogosVencidos * 10) - (this.jogosPerdidos * 5);
+
+    // Garante que a pontuação não seja negativa
+    if (this.pontuacao < 0) {
+      this.pontuacao = 0;
+    }
   }
+
+
 }
+
 
 module.exports = Estatisticas

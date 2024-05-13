@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const amizadesController = require('../controllers/AmizadesController');
+const estatisticasController = require('../controllers/EstatisticasController');
 
-// Rota para criar um novo jogador (CREATE)
-router.post('/', amizadesController.create);
+// Rota para criar uma nova estatistica (CREATE)
+router.post('/', estatisticasController.create);
 
-// Rota para listar todos os jogadores (READ)
-router.get('/', amizadesController.list);
+// Rota para listar todas as estatisticas (READ)
+router.get('/', estatisticasController.list);
 
-// Rota para mostrar um jogador (READ)
-router.get('/:id', amizadesController.show);
+// Rota para mostrar uma estatistica (READ)
+router.get('/:id', estatisticasController.show);
 
-// Rota para atualizar um jogador (UPDATE)
-router.put('/:id', amizadesController.update);
+// Rota para atualizar uma estatistica (UPDATE)
+router.put('/:id', estatisticasController.update);
 
-// Rota para deletar um jogador (DELETE)
-router.delete('/:id', amizadesController.delete);
+// Rota para deletar uma estatistica (DELETE)
+router.delete('/:id', estatisticasController.delete);
 
 module.exports = router;

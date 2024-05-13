@@ -31,7 +31,7 @@ class ConquistasDAO {
     return conquistas;
   }
 
-  // Retorna um conquista filtrado peloa sua ID
+  // Retorna um conquista filtrado pela sua ID
   buscarPorId(id) {
     return conquistas.find(conquista => conquista.id === id);
   }
