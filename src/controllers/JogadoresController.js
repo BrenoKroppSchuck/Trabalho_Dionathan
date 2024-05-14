@@ -99,7 +99,7 @@ class JogadoresController {
       JogadoresDAO.deletar(id);
 
       // Faz o response para o browser
-      res.status(200).send()
+      res.status(200).json({ message: "Jogador deletado com sucesso"});
     }
     else {
       // Faz o response para o browser

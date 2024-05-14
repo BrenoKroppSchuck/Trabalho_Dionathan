@@ -81,7 +81,7 @@ class ConquistasController {
       ConquistasDAO.deletar(id);
 
       // Responde ao navegador
-      res.status(200).send()
+      res.status(200).json({ message: "Conquista deletada com sucesso"});
     }
     else {
       // Responde ao navegador

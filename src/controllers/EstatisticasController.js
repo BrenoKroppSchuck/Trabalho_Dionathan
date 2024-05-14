@@ -109,13 +109,16 @@ class EstatisticasController {
       EstatisticasDAO.deletar(id);
 
       // Responde ao navegador
-      res.status(200).send()
+      res.status(200).json({ message: "Estatistica deletada com sucesso"});
     }
     else {
       // Responde ao navegador
       res.status(404).json({ message: 'Estatística não encontrada' });
     }
   }
+
+
+
 }
 
 module.exports = new EstatisticasController();

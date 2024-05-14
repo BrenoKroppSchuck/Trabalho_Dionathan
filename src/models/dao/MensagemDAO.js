@@ -1,4 +1,5 @@
 const mensagem = require("../mensagem")
+const JogadoresDAO = require("../dao/JogadoresDAO")
 
 
 let mensagens = [
@@ -34,11 +35,29 @@ class MensagemDAO {
     }
 
     listar() {
-        return mensagens;
+        // Retorna as mensagens com as informações dos remetentes e destinatários
+        return mensagens.map(mensagem => ({
+            id: mensagem.id,
+            texto: mensagem.texto,
+            remetente: JogadoresDAO.buscarPorId(mensagem.remetente),
+            destinatario: JogadoresDAO.buscarPorId(mensagem.destinatario),
+            dataHora: mensagem.dataHora
+        }));
     }
 
     buscarPorId(id) {
-        return mensagens.find(mensagem => mensagem.id === id);
+        // Retorna a mensagem correspondente ao ID fornecido com as informações dos remetentes e destinatários
+        const mensagem = mensagens.find(mensagem => mensagem.id === id);
+        if (mensagem) {
+            return {
+                id: mensagem.id,
+                texto: mensagem.texto,
+                remetente: JogadoresDAO.buscarPorId(mensagem.remetente),
+                destinatario: JogadoresDAO.buscarPorId(mensagem.destinatario),
+                dataHora: mensagem.dataHora
+            };
+        }
+        return null;
     }
 
     atualizar(id, mensagemAtualizada) {
@@ -56,4 +75,4 @@ class MensagemDAO {
     }
 }
 
-module.exports = new MensagemDAO();
+module.exports = new MensagemDAO();

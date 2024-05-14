@@ -1,4 +1,5 @@
 const Partida = require("../partida")
+const JogadoresDAO = require("../dao/JogadoresDAO")
 
 let partidas = [
     // Altere aqui para as suas partidas
@@ -35,12 +36,28 @@ class PartidaDAO {
   
     // Listar todas as partidas
     listar() {
-      return partidas; // Retorna a lista completa de partidas.
+      // Retorna as partidas com as informações dos times vencedores, times perdedores e o MVP
+      return partidas.map(partida => ({
+        idPartida: partida.idPartida,
+        timeVencedor: partida.timeVencedor.map(jogadorId => JogadoresDAO.buscarPorId(jogadorId)),
+        timePerdedor: partida.timePerdedor.map(jogadorId => JogadoresDAO.buscarPorId(jogadorId)),
+        mvp: JogadoresDAO.buscarPorId(partida.mvp)
+      }));
     }
   
     //Buscar uma partida pelo ID
     buscarPorId(idPartida) {
-      return partidas.find(partida => partida.idPartida === idPartida); // Retorna a partida correspondente ao ID fornecido
+      // Retorna a partida correspondente ao ID fornecido com as informações dos times vencedores, times perdedores e o MVP
+      const partida = partidas.find(partida => partida.idPartida === idPartida);
+      if (partida) {
+        return {
+          idPartida: partida.idPartida,
+          timeVencedor: partida.timeVencedor.map(jogadorId => JogadoresDAO.buscarPorId(jogadorId)),
+          timePerdedor: partida.timePerdedor.map(jogadorId => JogadoresDAO.buscarPorId(jogadorId)),
+          mvp: JogadoresDAO.buscarPorId(partida.mvp)
+        };
+      }
+      return null;
     }
   
     // Atualizar uma partida
@@ -57,7 +74,6 @@ class PartidaDAO {
       // Remove a partida correspondente ao ID fornecido da lista de partidas
       partidas = partidas.filter(partida => partida.idPartida !== idPartida);
     }
-  }
-  
-  module.exports = new PartidaDAO();
+}
 
+module.exports = new PartidaDAO();
